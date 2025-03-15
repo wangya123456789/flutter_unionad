@@ -7,12 +7,14 @@ import android.view.View
 import android.widget.FrameLayout
 import com.bytedance.sdk.openadsdk.*
 import com.bytedance.sdk.openadsdk.TTAdDislike.DislikeInteractionCallback
+import com.bytedance.sdk.openadsdk.mediation.MediationConstant
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationExpressRenderListener
 import com.gstory.flutter_unionad.EcpmUtil
 import com.gstory.flutter_unionad.FlutterunionadViewConfig
 import com.gstory.flutter_unionad.TTAdManagerHolder
 import com.gstory.flutter_unionad.UIUtils
+import com.qq.e.ads.cfg.VideoOption
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
@@ -67,13 +69,20 @@ class NativeAdView(
             .setCodeId(mCodeId)
             .setSupportDeepLink(supportDeepLink!!)
             .setAdCount(1) //请求广告数量为1到3条
+
             .setImageAcceptedSize(
                 UIUtils.dip2px(context, viewWidth).toInt(),
                 UIUtils.dip2px(context, viewHeight).toInt()
             )
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
-                    .setMuted(isMuted!!)
+                    .setMuted(true)
+                    .setVolume(0f)
+                    .setExtraObject(MediationConstant.KEY_GDT_VIDEO_OPTION,
+                         VideoOption.Builder()
+                            .setAutoPlayMuted(true)//gdt是否静音
+                            .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
+                            .build())
                     .build()
             )
             .build()

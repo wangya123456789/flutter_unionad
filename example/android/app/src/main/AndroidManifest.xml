@@ -25,7 +25,8 @@
         android:label="flutter_unionad_example"
         android:icon="@mipmap/ic_launcher"
         android:networkSecurityConfig="@xml/network_config"
-        tools:replace="android:label">
+        android:allowBackup="true"
+        tools:replace="android:label,android:allowBackup">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

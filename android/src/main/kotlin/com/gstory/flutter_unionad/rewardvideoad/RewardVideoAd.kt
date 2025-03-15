@@ -67,6 +67,8 @@ object RewardVideoAd {
             .setOrientation(orientation!!)//横竖屏设置
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
+                    .setMuted(true)
+                    .setVolume(0f)
                     .setRewardName(rewardName) //奖励的名称
                     .setRewardAmount(rewardAmount!!) //奖励的数量
                     .setExtraObject(MediationConstant.ADN_PANGLE, mediaExtra)//服务端奖励验证透传参数
