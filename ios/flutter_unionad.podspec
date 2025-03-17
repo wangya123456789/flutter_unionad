@@ -16,9 +16,18 @@ A new flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.static_framework = true
   s.dependency 'Flutter'
-  s.platform = :ios, '9.0'
-  s.dependency 'Ads-CN-Beta/BUAdSDK','6.7.0.3'
-  s.dependency 'Ads-CN-Beta/CSJMediation','6.7.0.3'
+  s.platform = :ios, '12.0'
+
+
+  s.dependency 'Ads-CN-Beta/CSJMediation','6.8.0.0'
+  s.dependency 'GMGdtAdapter-Beta','4.15.22.0'
+  s.dependency 'GMBaiduAdapter-Beta','5.373.0'
+  s.dependency 'GMKsAdapter-Beta','3.3.74.0'
+  s.dependency 'GDTMobSDK','4.15.22'
+  s.dependency 'BaiduMobAdSDK','5.373'
+  s.dependency 'KSAdSDK','3.3.74'
+
+
 # 引入融合Adapters(推荐使用自动拉取adapter工具，此处无需引入)
 # pod 'GMGdtAdapter-Beta', '4.15.10.1'
 # pod 'GMBaiduAdapter-Beta', '5.370.2'
