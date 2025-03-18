@@ -42,7 +42,7 @@ public class DrawFeedAdView : NSObject,FlutterPlatformView{
         bUadSolt.id = self.mCodeId!
         let adSize = CGSizeMake(CGFloat(self.viewWidth!),CGFloat(self.viewHeight!))
         bUadSolt.adSize = adSize
-        bUadSolt.mediation.mutedIfCan = self.isMuted!; // 静音 聚合功能
+        bUadSolt.mediation.mutedIfCan = true; // 静音 聚合功能
         self.nativeExpressAdManager = BUNativeExpressAdManager.init(slot: bUadSolt, adSize:  adSize)
         self.nativeExpressAdManager.delegate = self;
         self.nativeExpressAdManager.loadAdData(withCount: 1)

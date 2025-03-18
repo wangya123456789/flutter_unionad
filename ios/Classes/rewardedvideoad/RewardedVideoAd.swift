@@ -35,7 +35,13 @@ public class RewardedVideoAd : NSObject{
         if mediaExtra != nil {
             self.rewardModel!.extra = mediaExtra
         }
-        self.bURewardedVideoAd = BUNativeExpressRewardedVideoAd(slotID: mCodeId!, rewardedVideoModel: self.rewardModel!)
+        
+        let slot = BUAdSlot()
+        slot.id = mCodeId!
+        slot.mediation.mutedIfCan = true;    //静音
+        
+        
+        self.bURewardedVideoAd = BUNativeExpressRewardedVideoAd(slot: slot, rewardedVideoModel: self.rewardModel!)
         self.bURewardedVideoAd!.delegate = self
         self.bURewardedVideoAd!.loadData()
     }
