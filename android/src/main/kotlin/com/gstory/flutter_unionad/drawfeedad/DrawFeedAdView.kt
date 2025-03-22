@@ -13,6 +13,7 @@ import com.bytedance.sdk.openadsdk.mediation.manager.MediationNativeManager
 import com.gstory.flutter_unionad.EcpmUtil
 import com.gstory.flutter_unionad.FlutterunionadViewConfig
 import com.gstory.flutter_unionad.UIUtils
+import com.qq.e.ads.cfg.VideoOption
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
@@ -68,12 +69,19 @@ internal class DrawFeedAdView(
             .setAdCount(1) //请求广告数量为1到3条
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
-                    .setMuted(isMuted!!)
+                    .setExtraObject(
+                        MediationConstant.KEY_GDT_VIDEO_OPTION,
+                        VideoOption.Builder().setAutoPlayMuted(true)
+                            .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
+                            .build()
+                    )
+                    .setMuted(true)
+                    .setVolume(0f)
                     .build()
             )
-            .setImageAcceptedSize(
-                UIUtils.dip2px(context, viewWidth).toInt(),
-                UIUtils.dip2px(context, viewHeight).toInt()
+            .setExpressViewAcceptedSize(
+               viewWidth,
+               0f
             )
             .build()
         val mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity)
