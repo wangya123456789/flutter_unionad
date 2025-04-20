@@ -141,10 +141,7 @@ class NativeAdView(
                 var map: MutableMap<String, Any?> =
                     mutableMapOf("width" to p1, "height" to p2)
                 channel?.invokeMethod("onShow", map)
-                //获取ecpm·
-                var ecpmMap = EcpmUtil.toMap(mNativeAd?.mediationManager?.showEcpm)
-                Log.d(TAG, "ecpm: $ecpmMap")
-                channel?.invokeMethod("onEcpm", ecpmMap)
+
             }
 
             override fun onRenderFail(p0: View?, p1: String?, p2: Int) {
@@ -159,6 +156,10 @@ class NativeAdView(
 
             override fun onAdShow() {
                 Log.e(TAG, "广告展示")
+                //获取ecpm·
+                var ecpmMap = EcpmUtil.toMap(mNativeAd?.mediationManager?.showEcpm)
+                Log.d(TAG, "信息流ecpm: $ecpmMap")
+                channel?.invokeMethod("onEcpm", ecpmMap)
             }
 
         })
