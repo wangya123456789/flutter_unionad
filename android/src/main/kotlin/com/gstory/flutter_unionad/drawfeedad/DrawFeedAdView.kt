@@ -9,10 +9,10 @@ import com.bytedance.sdk.openadsdk.*
 import com.bytedance.sdk.openadsdk.mediation.MediationConstant
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationExpressRenderListener
+import com.bytedance.sdk.openadsdk.mediation.manager.MediationBaseManager
 import com.bytedance.sdk.openadsdk.mediation.manager.MediationNativeManager
 import com.gstory.flutter_unionad.EcpmUtil
 import com.gstory.flutter_unionad.FlutterunionadViewConfig
-import com.gstory.flutter_unionad.UIUtils
 import com.qq.e.ads.cfg.VideoOption
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -71,19 +71,18 @@ internal class DrawFeedAdView(
                 MediationAdSlot.Builder()
                     .setExtraObject(
                         MediationConstant.KEY_GDT_VIDEO_OPTION,
-                        VideoOption.Builder().setAutoPlayMuted(true)
+                        VideoOption.Builder()
+                            .setAutoPlayMuted(true)
                             .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
                             .build()
                     )
                     .setMuted(true)
                     .setVolume(0f)
                     .build()
-            )
-            .setExpressViewAcceptedSize(
+            ).setExpressViewAcceptedSize(
                viewWidth,
                0f
-            )
-            .build()
+            ).build()
         val mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity)
         mTTAdNative.loadDrawFeedAd(adSlot, object : TTAdNative.DrawFeedAdListener {
             override fun onError(code: Int, message: String) {
@@ -147,8 +146,23 @@ internal class DrawFeedAdView(
                 Log.e(TAG, "广告显示")
                 //获取ecpm·
                 var ecpmMap = EcpmUtil.toMap(mDrawFeedAd?.mediationManager?.showEcpm)
-                Log.d(TAG, "ecpm: $ecpmMap")
+                Log.d(TAG, "Draw信息流ecpm: $ecpmMap")
                 channel?.invokeMethod("onEcpm", ecpmMap)
+
+
+                //广告展示
+                //获取展示广告相关信息，需要再show回调之后进行获取
+                val manager: MediationNativeManager? = mDrawFeedAd?.mediationManager
+                if (manager?.showEcpm != null) {
+                    val showEcpm = manager.showEcpm
+                    val ecpm = showEcpm.ecpm //展示广告的价格
+                    val sdkName = showEcpm.sdkName //展示广告的adn名称
+                    val slotId = showEcpm.slotId //展示广告的代码位ID
+
+                    Log.d("广告Ecpm","广告价格统计：【ecpm：$ecpm】 - 【sdkName：$sdkName】 - 【代码位id：$slotId】")
+                }else{
+                    Log.d("广告Ecpm","广告价格统计失败Ecpm为null")
+                }
             }
 
         })

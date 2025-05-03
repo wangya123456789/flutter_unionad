@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.bytedance.sdk.openadsdk.*
 import com.bytedance.sdk.openadsdk.mediation.init.IMediationPrivacyConfig
+import com.bytedance.sdk.openadsdk.mediation.init.MediationConfig
 import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig
 
 /**
@@ -139,6 +140,10 @@ object TTAdManagerHolder {
                     }
                 })
                 .themeStatus(themeStatus)
+                .setMediationConfig(MediationConfig.Builder()
+                    .setWxAppId(keywords)
+                    .build()
+                )
                 .build()
         )
         TTAdSdk.start(object : TTAdSdk.Callback {
