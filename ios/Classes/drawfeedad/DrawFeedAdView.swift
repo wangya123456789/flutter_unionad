@@ -8,7 +8,7 @@ import Foundation
 import BUAdSDK
 import Flutter
 
-public class DrawFeedAdView : NSObject,FlutterPlatformView{
+public class DrawFeedAdView : NSObject,FlutterPlatformView,BUCustomEventProtocol{
     private var container : UIView
     private var nativeExpressAdManager : BUNativeExpressAdManager
     private var channel : FlutterMethodChannel?
@@ -38,13 +38,15 @@ public class DrawFeedAdView : NSObject,FlutterPlatformView{
     
     public func loadDrawAd(){
         self.removeAllView()
-        let bUadSolt = BUAdSlot.init()
+        let bUadSolt = BUAdSlot()
         bUadSolt.id = self.mCodeId!
         let adSize = CGSizeMake(CGFloat(self.viewWidth!),CGFloat(self.viewHeight!))
         bUadSolt.adSize = adSize
         bUadSolt.mediation.mutedIfCan = true; // 静音 聚合功能
-        self.nativeExpressAdManager = BUNativeExpressAdManager.init(slot: bUadSolt, adSize:  adSize)
+    
+        self.nativeExpressAdManager = BUNativeExpressAdManager(slot: bUadSolt, adSize:  adSize)
         self.nativeExpressAdManager.delegate = self;
+        self.nativeExpressAdManager.mediation?.addParam(1, withKey: BUMAdLoadingParamNAIsMute) ///腾讯静音
         self.nativeExpressAdManager.loadAdData(withCount: 1)
     }
     
