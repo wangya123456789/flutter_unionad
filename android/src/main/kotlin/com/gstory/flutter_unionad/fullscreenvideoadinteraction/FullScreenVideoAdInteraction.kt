@@ -48,7 +48,7 @@ object FullScreenVideoAdInteraction {
         val adSlot = AdSlot.Builder().setCodeId(mCodeId) //广告位id
             .setOrientation(orientation).setMediationAdSlot(
                 MediationAdSlot.Builder().setMuted(true)//是否静音
-                    .setVolume(0.5f)//设置音量
+                    .setVolume(0f)//设置音量
                     .setBidNotify(true)//竞价结果通知
                     .build()
             ).build()
