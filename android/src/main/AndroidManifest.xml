@@ -73,7 +73,8 @@
         <activity
             android:name="com.baidu.mobads.sdk.api.AppActivity"
             android:configChanges="screenSize|keyboard|keyboardHidden|orientation"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:theme="@android:style/Theme.NoTitleBar"
+            tools:replace="android:configChanges"/>
         <!--  声明打开显示激励视频/全屏视频的Activity -->
         <activity
             android:name="com.baidu.mobads.sdk.api.MobRewardVideoActivity"
@@ -109,12 +110,13 @@
         <activity
             android:name="com.qq.e.ads.PortraitADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:replace="android:configChanges"/>
         <activity
             android:name="com.qq.e.ads.LandscapeADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
-            tools:replace="android:screenOrientation" />
+            tools:replace="android:screenOrientation,android:configChanges"/>
         <!--  声明SDK所需要的组件  -->
         <service
             android:name="com.qq.e.comm.DownloadService"
@@ -122,7 +124,8 @@
         <!--  请开发者注意字母的大小写，ADActivity，而不是AdActivity  -->
         <activity
             android:name="com.qq.e.ads.ADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            tools:replace="android:configChanges"/>
         <!--  GDT end==================  -->
 
 

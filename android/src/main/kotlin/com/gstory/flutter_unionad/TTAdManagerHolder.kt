@@ -60,15 +60,12 @@ object TTAdManagerHolder {
                 .customController(object : TTCustomController() {
                     //是否允许SDK主动使用地理位置信息
                     override fun isCanUseLocation(): Boolean {
-                        return androidPrivacy["isCanUseLocation"] as Boolean
+                        return false
                     }
 
                     //可传入地理位置信息
-                    override fun getTTLocation(): TTLocation {
-                        return TTLocation(
-                            androidPrivacy["lat"] as Double,
-                            androidPrivacy["lon"] as Double
-                        )
+                    override fun getTTLocation(): TTLocation? {
+                        return null
                     }
 
                     //是否允许sdk上报手机app安装列表
