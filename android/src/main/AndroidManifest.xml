@@ -40,10 +40,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
-            android:exported="false" />
+
+<!--        <provider-->
+<!--            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"-->
+<!--            android:authorities="${applicationId}.TTMultiProvider"-->
+<!--            android:exported="false"-->
+<!--            tools:ignore="MissingClass" />-->
 
         <activity
             android:name=".rewardvideoad.RewardVideoAd"
@@ -51,7 +53,7 @@
             tools:ignore="Instantiatable" />
 
 
-        <!--  穿山甲 start==================  -->
+        <!-- 穿山甲 start================== -->
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
             android:authorities="${applicationId}.TTFileProvider"
@@ -61,11 +63,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/pangle_file_paths" />
         </provider>
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
-            android:exported="false" />
-        <!--  穿山甲 end==================  -->
+
+        <!-- 73xx及以上版本则无需配置TTMultiProvider -->
+<!--        <provider-->
+<!--            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"-->
+<!--            android:authorities="${applicationId}.TTMultiProvider"-->
+<!--            android:exported="false"-->
+<!--            tools:ignore="MissingClass" />-->
+        <!-- 穿山甲 end================== -->
 
 
         <!--  baidu start==================  -->
