@@ -74,18 +74,17 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.3.1"
 
 
-    implementation(name: 'open_ad_sdk_7.3.0.7', ext: 'aar')
-
+    implementation(name: 'open_ad_sdk_7.4.2.0', ext: 'aar')
     //ks
-    implementation(name: "mediation_ks_adapter_4.9.20.1.2", ext: 'aar')
-    implementation(name: "kssdk-ad-4.9.20.1", ext: 'aar')
+    implementation(name: "mediation_ks_adapter_4.11.20.1.0", ext: 'aar')
+    implementation(name: "kssdk-ad-4.11.20.1", ext: 'aar')
 
     //baidu
-    implementation(name: "mediation_baidu_adapter_9.423.2", ext: 'aar')
+    implementation(name: "mediation_baidu_adapter_9.423.3", ext: 'aar')
     implementation(name: "Baidu_MobAds_SDK_v9.423", ext: 'aar')
 
     //gdt
-    implementation(name: "mediation_gdt_adapter_4.660.1530.2", ext: 'aar')
-    implementation(name: "GDTSDK.unionNormal.4.660.1530", ext: 'aar')
+    implementation(name: "mediation_gdt_adapter_4.662.1532.0", ext: 'aar')
+    implementation(name: "GDTSDK.unionNormal.4.662.1532", ext: 'aar')
 
 }
