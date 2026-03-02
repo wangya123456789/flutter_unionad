@@ -8,9 +8,11 @@ import com.bytedance.sdk.openadsdk.AdSlot
 import com.bytedance.sdk.openadsdk.TTAdNative
 import com.bytedance.sdk.openadsdk.TTAdSdk
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd
+import com.bytedance.sdk.openadsdk.mediation.MediationConstant
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot
 import com.gstory.flutter_unionad.EcpmUtil
 import com.gstory.flutter_unionad.FlutterUnionadEventPlugin
+import com.qq.e.ads.cfg.VideoOption
 
 /**
  * @Description:
@@ -47,7 +49,14 @@ object FullScreenVideoAdInteraction {
         //设置广告参数
         val adSlot = AdSlot.Builder().setCodeId(mCodeId) //广告位id
             .setOrientation(orientation).setMediationAdSlot(
-                MediationAdSlot.Builder().setMuted(true)//是否静音
+                MediationAdSlot.Builder()
+                    .setExtraObject(
+                        MediationConstant.KEY_GDT_VIDEO_OPTION,
+                        VideoOption.Builder()
+                            .setAutoPlayMuted(true)
+                            .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS)
+                            .build()
+                    ).setMuted(true)//是否静音
                     .setVolume(0f)//设置音量
                     .setBidNotify(true)//竞价结果通知
                     .build()
