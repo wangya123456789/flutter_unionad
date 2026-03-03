@@ -201,6 +201,6 @@ internal class BannerAdView(
 
     override fun dispose() {
         Log.e(TAG, "广告释放")
-        mBannerAd?.destroy()
+        //mBannerAd?.destroy()
     }
 }
