@@ -69,12 +69,9 @@ internal class BannerAdView(
             )
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
-                    .setMediationNativeToBannerListener(object : MediationNativeToBannerListener() {
-                        // Banner混出自渲染信息流时使用，将信息流素材渲染成View返回
-//                        override fun getMediationBannerViewFromNativeAd(p0: IMediationNativeAdInfo?): View? {
-//                            return super.getMediationBannerViewFromNativeAd(p0)
-//                        }
-                    })
+                    .setMuted(true)
+                    .setAllowShowCloseBtn(true)
+                    .setVolume(0f)
                     .build()
             )
             .build()
