@@ -127,6 +127,8 @@ internal class BannerAdView(
                 var map: MutableMap<String, Any?> =
                     mutableMapOf("width" to width, "height" to height)
                 channel?.invokeMethod("onShow", map)
+                var ecpmMap = EcpmUtil.toMap(mBannerAd?.mediationManager?.showEcpm)
+                Log.d(TAG, "Banner横幅ecpm: $ecpmMap")
             }
 
             override fun onRenderFail(view: View, msg: String, code: Int) {

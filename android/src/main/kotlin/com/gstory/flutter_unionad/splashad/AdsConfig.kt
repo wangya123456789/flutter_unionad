@@ -27,9 +27,9 @@ class AdsConfig {
                 configJsonObj = JSONObject();
             }
 
-//            Log.i("TAG", "广告配置信息");
-//            Log.i("TAG", packageName);
-//            Log.i("TAG", configJsonObj.toString());
+            Log.i("TAG", "广告配置信息");
+            Log.i("TAG", packageName);
+            Log.i("TAG", configJsonObj.toString());
 
 
             return configJsonObj!!
