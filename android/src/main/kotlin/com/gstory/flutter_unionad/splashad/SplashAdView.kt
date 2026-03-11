@@ -86,7 +86,8 @@ internal class SplashAdView(
             )
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
-                    .setSplashShakeButton(isShake!!) //开屏摇一摇开关
+                    .setSplashShakeButton(true) //开屏摇一摇开关
+                    .setSplashPreLoad(true) //开屏摇一摇开关
                     .build()
             )
             .build()

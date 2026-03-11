@@ -6,6 +6,7 @@ import com.bytedance.sdk.openadsdk.*
 import com.bytedance.sdk.openadsdk.mediation.init.IMediationPrivacyConfig
 import com.bytedance.sdk.openadsdk.mediation.init.MediationConfig
 import com.bytedance.sdk.openadsdk.mediation.init.MediationPrivacyConfig
+import com.gstory.flutter_unionad.splashad.AdsConfig
 
 /**
  * @Description:
@@ -139,6 +140,7 @@ object TTAdManagerHolder {
                 .themeStatus(themeStatus)
                 .setMediationConfig(MediationConfig.Builder()
                     .setWxAppId(keywords)
+                    .setCustomLocalConfig(AdsConfig.getAdsConfig(context))
                     .build()
                 )
                 .build()
