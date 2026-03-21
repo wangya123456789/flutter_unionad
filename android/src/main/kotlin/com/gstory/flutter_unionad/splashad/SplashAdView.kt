@@ -10,7 +10,9 @@ import com.bytedance.sdk.openadsdk.CSJAdError
 import com.bytedance.sdk.openadsdk.CSJSplashAd
 import com.bytedance.sdk.openadsdk.TTAdNative
 import com.bytedance.sdk.openadsdk.TTAdSdk
+import com.bytedance.sdk.openadsdk.mediation.MediationConstant
 import com.bytedance.sdk.openadsdk.mediation.ad.MediationAdSlot
+import com.bytedance.sdk.openadsdk.mediation.ad.MediationSplashRequestInfo
 import com.gstory.flutter_unionad.EcpmUtil
 import com.gstory.flutter_unionad.FlutterunionadViewConfig
 import com.gstory.flutter_unionad.UIUtils
@@ -41,7 +43,7 @@ internal class SplashAdView(
     private var isShake: Boolean? = true
     private var viewWidth: Float
     private var viewHeight: Float
-    private var timeout: Int = 3000
+    private var timeout: Int = 3500
 
     private var channel: MethodChannel?
 
@@ -75,17 +77,19 @@ internal class SplashAdView(
      * 加载开屏广告
      */
     private fun loadSplashAd() {
+
         val mTTAdNative = TTAdSdk.getAdManager().createAdNative(activity)
         var adSlot = AdSlot.Builder()
             .setCodeId(mCodeId)
             .setSupportDeepLink(supportDeepLink!!)
             //不区分渲染方式，要求开发者同时设置setImageAcceptedSize（单位：px）和setExpressViewAcceptedSize（单位：dp ）接口，不同时设置可能会导致展示异常。
-            .setImageAcceptedSize(
-                UIUtils.dip2px(context, viewWidth).toInt(),
-                UIUtils.dip2px(context, viewHeight).toInt()
+            .setExpressViewAcceptedSize(
+                viewWidth,
+                viewHeight
             )
             .setMediationAdSlot(
                 MediationAdSlot.Builder()
+                    .setMediationSplashRequestInfo(AdsConfig.getSplashConfig(context))
                     .setSplashShakeButton(true) //开屏摇一摇开关
                     .setSplashPreLoad(true) //开屏摇一摇开关
                     .build()
