@@ -19,7 +19,7 @@ A new flutter plugin project.
   s.platform = :ios, '12.0'
 
 
-  s.dependency 'Ads-CN-Beta/CSJMediation','7.5.0.1'
+  s.dependency 'Ads-CN-Beta/CSJMediation','7.5.0.4'
   s.dependency 'GMGdtAdapter-Beta','4.15.75.0'
   s.dependency 'GMBaiduAdapter-Beta','10.032.1'
   s.dependency 'GMKsAdapter-Beta','4.12.20.1.0'
