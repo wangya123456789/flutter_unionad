@@ -9,21 +9,44 @@ import BUAdSDK
 import Flutter
 
 public class BannerAdView : NSObject,FlutterPlatformView{
-    private var container : ADContainerView
-    var frame: CGRect;
+    private let container : ADContainerView
+    private var bannerAdView : BUNativeExpressBannerView?
     private var channel : FlutterMethodChannel?
+    var frame: CGRect;
+    //广告需要的参数
+    var mCodeId :String?
+    var viewWidth : Float?
+    var viewHeight :Float?
     
     init(_ frame : CGRect,binaryMessenger: FlutterBinaryMessenger , id : Int64, params :Any?) {
         self.frame = frame
         self.container = ADContainerView(frame: frame)
         let dict = params as! NSDictionary
+        self.mCodeId = dict.value(forKey: "iosCodeId") as? String
+        self.viewWidth = Float(dict.value(forKey: "width") as! Double)
+        self.viewHeight = Float(dict.value(forKey: "height") as! Double)
         super.init()
         self.channel = FlutterMethodChannel.init(name: FlutterUnionadConfig.view.bannerAdView + "_" + String(id), binaryMessenger: binaryMessenger)
-        self.container = MyBannerView(frame: frame, dict: dict, methodChannel: channel!)
+        self.loadBannerAd()
     }
     
     public func view() -> UIView {
         return self.container
+    }
+    
+    private func loadBannerAd(){
+        let width:CGFloat = CGFloat(self.viewWidth!)
+        let heigh:CGFloat = CGFloat(self.viewHeight!)
+        let size = CGSize(width: width, height: heigh)
+        self.bannerAdView = BUNativeExpressBannerView.init(slotID: self.mCodeId!, rootViewController: MyUtils.getVC(), adSize: size)
+        self.bannerAdView!.delegate = self
+        self.bannerAdView!.frame = CGRect(x: 0, y: 0, width: width, height: heigh)
+        self.bannerAdView!.center = CGPoint(x: width / 2, y: heigh / 2)
+        self.bannerAdView!.loadAdData()
+    }
+    
+    private func disposeView() {
+        self.container.removeFromSuperview()
     }
     
     deinit {
@@ -31,46 +54,10 @@ public class BannerAdView : NSObject,FlutterPlatformView{
     }
 }
 
-class MyBannerView : ADContainerView{
-    private var channel : FlutterMethodChannel?
-    //广告需要的参数
-    var mCodeId :String?
-    var viewWidth : Float?
-    var viewHeight :Float?
-    
-    init(frame: CGRect, dict:NSDictionary, methodChannel: FlutterMethodChannel) {
-        self.mCodeId = dict.value(forKey: "iosCodeId") as? String
-        self.viewWidth = Float(dict.value(forKey: "width") as! Double)
-        self.viewHeight = Float(dict.value(forKey: "height") as! Double)
-        self.channel = methodChannel
-        super.init(frame: frame)
-        self.loadBannerAd()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    private func loadBannerAd(){
-        let width:CGFloat = CGFloat(self.viewWidth!)
-        let heigh:CGFloat = CGFloat(self.viewHeight!)
-        let size = CGSize(width: width, height: heigh)
-        let bannerAdView = BUNativeExpressBannerView.init(slotID: self.mCodeId!, rootViewController: MyUtils.getVC(), adSize: size)
-        bannerAdView.delegate = self
-        bannerAdView.frame = CGRect(x: 0, y: 0, width: width, height: heigh)
-        bannerAdView.center = CGPoint(x: width / 2, y: heigh / 2)
-        addSubview(bannerAdView)
-        bannerAdView.loadAdData()
-    }
-    
-    private func disposeView() {
-        removeFromSuperview()
-    }
-}
-
-extension MyBannerView: BUNativeExpressBannerViewDelegate {
+extension BannerAdView: BUNativeExpressBannerViewDelegate {
     public func nativeExpressBannerAdViewDidLoad(_ bannerAdView: BUNativeExpressBannerView) {
-        
+        LogUtil.logInstance.printLog(message: "banner加载成功")
+        self.container.addSubview(bannerAdView)
     }
 
     public func nativeExpressBannerAdViewRenderFail(_ bannerAdView: BUNativeExpressBannerView, error: Error?) {
@@ -103,7 +90,6 @@ extension MyBannerView: BUNativeExpressBannerViewDelegate {
         let ecpmInfo : BUMRitInfo? = bannerAdView.mediation?.getShowEcpmInfo();
         LogUtil.logInstance.printLog(message:"ecpm获取成功：\(ecpmInfo?.toDictionary())");
         self.channel?.invokeMethod("onEcpm", arguments: ecpmInfo?.toDictionary())
-
     }
     
     public func nativeExpressBannerAdViewDidClick(_ bannerAdView: BUNativeExpressBannerView) {
@@ -116,4 +102,3 @@ extension MyBannerView: BUNativeExpressBannerViewDelegate {
         self.disposeView()
     }
 }
-
