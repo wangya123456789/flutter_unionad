@@ -19,13 +19,13 @@ A new flutter plugin project.
   s.platform = :ios, '12.0'
 
 
-  s.dependency 'Ads-CN-Beta/CSJMediation','7.6.0.0'
-  s.dependency 'GMGdtAdapter-Beta','4.15.75.0'
-  s.dependency 'GMBaiduAdapter-Beta','10.032.1'
-  s.dependency 'GMKsAdapter-Beta','4.12.20.1.0'
-  s.dependency 'GDTMobSDK','4.15.75'
-  s.dependency 'BaiduMobAdSDK','10.032'
-  s.dependency 'KSAdSDK','4.12.20.1'
+  s.dependency 'Ads-CN-Beta/CSJMediation','7.6.0.3'
+  s.dependency 'GMGdtAdapter-Beta','4.15.80.0'
+  s.dependency 'GMBaiduAdapter-Beta','10.050.0'
+  s.dependency 'GMKsAdapter-Beta','5.3.20.1.0'
+  s.dependency 'GDTMobSDK','4.15.80'
+  s.dependency 'BaiduMobAdSDK','10.050'
+  s.dependency 'KSAdSDK','5.3.20.1'
 
 
 # 引入融合Adapters(推荐使用自动拉取adapter工具，此处无需引入)
